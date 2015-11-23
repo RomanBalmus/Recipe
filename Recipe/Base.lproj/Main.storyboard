@@ -32,6 +32,9 @@
                                             <animations/>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <connections>
+                                            <segue destination="A6F-Cp-9Xc" kind="show" identifier="firstDetail" id="LkI-Yn-EEG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -58,6 +61,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="812" y="-1418"/>
+        </scene>
+        <!--First Detail View Controller-->
+        <scene sceneID="JQ4-dd-oJ7">
+            <objects>
+                <viewController id="A6F-Cp-9Xc" customClass="FirstDetailViewController" customModule="Recipe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FcM-YT-1lX"/>
+                        <viewControllerLayoutGuide type="bottom" id="xib-tT-d62"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uHX-6M-ojG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E39-L9-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1516" y="-1418"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="wg7-f3-ORb">

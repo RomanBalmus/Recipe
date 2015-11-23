@@ -47,6 +47,7 @@
 		426A8A441BFF6B3100249AF1 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A8A431BFF6B3100249AF1 /* Alamofire.framework */; };
 		426A8A451BFF6B3100249AF1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 426A8A431BFF6B3100249AF1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		426A8A471BFF6BB400249AF1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A8A461BFF6BB400249AF1 /* FacebookSDK.framework */; };
+		429972391C0377C300C4FE60 /* FirstDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429972381C0377C300C4FE60 /* FirstDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		426A8A3C1BFF66CF00249AF1 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		426A8A431BFF6B3100249AF1 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/Programmer/Library/Developer/Xcode/DerivedData/Recipe-dfwmdzcgizvnplafcqghkyrgzekp/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<absolute>"; };
 		426A8A461BFF6BB400249AF1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		429972381C0377C300C4FE60 /* FirstDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstDetailViewController.swift; sourceTree = "<group>"; };
 		D9A30AFD14CD66E3404A37D1 /* libPods-Recipe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Recipe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC54DB9E0F5F77CEA70DB98E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 				426A89A61BFF22DE00249AF1 /* LaunchScreen.storyboard */,
 				426A89A91BFF22DE00249AF1 /* Info.plist */,
 				426A8A1E1BFF5AF400249AF1 /* Recipe-Bridging-Header.h */,
+				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 			files = (
 				426A8A281BFF5ECB00249AF1 /* PushNotification.swift in Sources */,
 				426A89E51BFF361F00249AF1 /* RegisterViewController.swift in Sources */,
+				429972391C0377C300C4FE60 /* FirstDetailViewController.swift in Sources */,
 				426A89B41BFF257E00249AF1 /* FifthViewController.swift in Sources */,
 				426A89EB1BFF3A7A00249AF1 /* ProgressHUD.m in Sources */,
 				426A8A2B1BFF5EF100249AF1 /* Constants.swift in Sources */,
