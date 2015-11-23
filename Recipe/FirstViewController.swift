@@ -131,8 +131,9 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         if PFUser.currentUser() != nil {
             print("we are logged and we are good to go")
             Utilities.askNotifications(UIApplication.sharedApplication())
-            
+            if elements.count==0{
             parseData()
+            }
             
         }
         else{
