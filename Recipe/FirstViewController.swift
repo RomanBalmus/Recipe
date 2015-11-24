@@ -34,7 +34,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         
         let localquery = PFQuery(className:"Recipes")
         localquery.fromLocalDatastore()
-        localquery.orderByDescending("createdAt")
+        localquery.orderByAscending("createdAt")
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             
@@ -44,7 +44,8 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                 if objects?.count > 0 {
                     if let objects = objects   {
                         for object in objects {
-                            self.elements.addObject(object)
+                            self.elements.insertObject(object, atIndex: 0)
+
                             self.firstTableView.reloadData()
 
                             print("localid : \(object.objectId)")
@@ -52,7 +53,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                             
                         }
                         
-                        let localLast = objects.first! as PFObject
+                        let localLast = objects.last! as PFObject
                         
                         let remotelast = NSUserDefaults.standardUserDefaults().objectForKey("last_insert") as! NSDate
                         print("localLast: \(localLast.createdAt! as NSDate) and remoteLast: \(remotelast)")
@@ -67,8 +68,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                                 if let objectss = objectss   {
                                     for objectsy in objectss {
                                         print("syncqueryid : \(objectsy.objectId)")
-                                        //print("remotecreated : \(objectr.createdAt)")
-                                        self.elements.addObject(objectsy)
+                                        self.elements.insertObject(objectsy, atIndex: 0)
 
                                          objectsy.pinInBackground()
                                         NSUserDefaults.standardUserDefaults().setObject(objectsy.createdAt! as NSDate, forKey: "last_insert")
@@ -87,15 +87,14 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                     
                 }else{
                     let remotequery = PFQuery(className:"Recipes")
-                    
                     remotequery.findObjectsInBackgroundWithBlock {
                         (objectsr:[PFObject]?, errorr: NSError?) -> Void in
                         
                         if let objectsr = objectsr   {
                             for objectr in objectsr {
                                 print("remoteid : \(objectr)")
-                                //print("remotecreated : \(objectr.createdAt)")
-                                self.elements.addObject(objectr)
+                                
+                                self.elements.insertObject(objectr, atIndex: 0)
 
                                  objectr.pinInBackground()
                                 NSUserDefaults.standardUserDefaults().setObject(objectr.createdAt, forKey: "last_insert")
