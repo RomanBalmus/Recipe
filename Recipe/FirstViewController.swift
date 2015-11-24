@@ -60,6 +60,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         print("done clicked \(searchBar.text)")
         //hideSearchBar()
         self.resultSearchController.dismissViewControllerAnimated(true, completion: {
+            self.searchActive=false
             let searchController = self.storyboard?.instantiateViewControllerWithIdentifier("SEARCH_VIEW_CONTROLLER") as? SearchViewController
             searchController?.setSearchTextReady(searchBar.text! as String)
             self.navigationController?.pushViewController(searchController!, animated: true)

@@ -97,7 +97,7 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
         let localquery = PFQuery(className:"Recipes")
         localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
-        localquery.whereKey("name", containsString: queTxt)
+        localquery.whereKey("name", matchesRegex: queTxt, modifiers: "i")
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             if error == nil {
