@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		421243011C005F910044A5CD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421243001C005F910044A5CD /* FBSDKCoreKit.framework */; };
+		425D21C71C04535100B381FC /* TodayRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425D21C61C04535100B381FC /* TodayRecipe.swift */; };
+		425D21C91C04571C00B381FC /* TodayRecipe.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425D21C81C04571C00B381FC /* TodayRecipe.xib */; };
 		426A899C1BFF22DE00249AF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426A899B1BFF22DE00249AF1 /* AppDelegate.swift */; };
 		426A899E1BFF22DE00249AF1 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426A899D1BFF22DE00249AF1 /* FirstViewController.swift */; };
 		426A89A01BFF22DE00249AF1 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426A899F1BFF22DE00249AF1 /* SecondViewController.swift */; };
@@ -86,6 +88,8 @@
 
 /* Begin PBXFileReference section */
 		421243001C005F910044A5CD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		425D21C61C04535100B381FC /* TodayRecipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayRecipe.swift; sourceTree = "<group>"; };
+		425D21C81C04571C00B381FC /* TodayRecipe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodayRecipe.xib; sourceTree = "<group>"; };
 		426A89981BFF22DE00249AF1 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		426A899B1BFF22DE00249AF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		426A899D1BFF22DE00249AF1 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		425D21C41C0452F400B381FC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				425D21C61C04535100B381FC /* TodayRecipe.swift */,
+				425D21C81C04571C00B381FC /* TodayRecipe.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		426A898F1BFF22DE00249AF1 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +225,7 @@
 		426A899A1BFF22DE00249AF1 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				425D21C41C0452F400B381FC /* Cells */,
 				426A8A3E1BFF688300249AF1 /* Resources */,
 				426A8A1F1BFF5EB600249AF1 /* Utilities */,
 				426A89E21BFF361F00249AF1 /* LoginViewController.swift */,
@@ -223,12 +237,12 @@
 				426A89AF1BFF256500249AF1 /* ThirdViewController.swift */,
 				426A89B11BFF257200249AF1 /* FourthViewController.swift */,
 				426A89B31BFF257E00249AF1 /* FifthViewController.swift */,
+				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 				426A89A11BFF22DE00249AF1 /* Main.storyboard */,
 				426A89A41BFF22DE00249AF1 /* Assets.xcassets */,
 				426A89A61BFF22DE00249AF1 /* LaunchScreen.storyboard */,
 				426A89A91BFF22DE00249AF1 /* Info.plist */,
 				426A8A1E1BFF5AF400249AF1 /* Recipe-Bridging-Header.h */,
-				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -395,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				426A89A81BFF22DE00249AF1 /* LaunchScreen.storyboard in Resources */,
+				425D21C91C04571C00B381FC /* TodayRecipe.xib in Resources */,
 				426A89A51BFF22DE00249AF1 /* Assets.xcassets in Resources */,
 				426A89A31BFF22DE00249AF1 /* Main.storyboard in Resources */,
 			);
@@ -412,6 +427,7 @@
 				429972391C0377C300C4FE60 /* FirstDetailViewController.swift in Sources */,
 				426A89B41BFF257E00249AF1 /* FifthViewController.swift in Sources */,
 				426A89EB1BFF3A7A00249AF1 /* ProgressHUD.m in Sources */,
+				425D21C71C04535100B381FC /* TodayRecipe.swift in Sources */,
 				426A8A2B1BFF5EF100249AF1 /* Constants.swift in Sources */,
 				426A8A261BFF5ECB00249AF1 /* Utilities.swift in Sources */,
 				426A89A01BFF22DE00249AF1 /* SecondViewController.swift in Sources */,

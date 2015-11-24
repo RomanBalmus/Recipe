@@ -11,7 +11,7 @@ import UIKit
 class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource {
     var allObjectArray: NSMutableArray = []
     var elements: NSMutableArray = []
-    
+    var refreshControl:UIRefreshControl!
     @IBOutlet weak var firstTableView: UITableView!
     var currentPage = 0
     var nextpage = 0
@@ -20,15 +20,31 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         // Do any additional setup after loading the view, typically from a nib.
         self.firstTableView.dataSource=self
         self.firstTableView.delegate=self
-      
         
+        let nib = UINib(nibName: "TodayRecipe", bundle: nil)
+        let view = nib.instantiateWithOwner(self, options: nil)[0] as! TodayRecipe
+
         
-  
-        
-            
+        view.headerLabel.text="fdfd"
+        view.backgroundColor =  UIColor(red:72/255,green:141/255,blue:200/255,alpha:0.9)
+        self.firstTableView.tableHeaderView=view
+        self.firstTableView.sectionHeaderHeight=UITableViewAutomaticDimension
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.firstTableView.addSubview(refreshControl)
         
     }
-    
+    func refresh(sender:AnyObject)
+    {
+        // Code to refresh table view
+        if elements.count > 0{
+            elements.removeAllObjects()
+        
+        }
+        self.firstTableView.reloadData()
+        parseData()
+    }
     
     func parseData(){
         
@@ -44,10 +60,13 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                 if objects?.count > 0 {
                     if let objects = objects   {
                         for object in objects {
+                            self.firstTableView.beginUpdates()
                             self.elements.insertObject(object, atIndex: 0)
 
-                            self.firstTableView.reloadData()
-
+                            let indexPath = NSIndexPath(forRow: 0, inSection: 1)
+                            
+                            self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                            self.firstTableView.endUpdates()
                             print("localid : \(object.objectId)")
                             
                             
@@ -68,12 +87,16 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                                 if let objectss = objectss   {
                                     for objectsy in objectss {
                                         print("syncqueryid : \(objectsy.objectId)")
+                                        self.firstTableView.beginUpdates()
                                         self.elements.insertObject(objectsy, atIndex: 0)
-
-                                         objectsy.pinInBackground()
+                                        let indexPath = NSIndexPath(forRow: 0, inSection: 1)
+                                        
+                                        self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                                        self.firstTableView.endUpdates()
+                                        objectsy.pinInBackground()
                                         NSUserDefaults.standardUserDefaults().setObject(objectsy.createdAt! as NSDate, forKey: "last_insert")
                                         NSUserDefaults.standardUserDefaults().synchronize()
-                                        self.firstTableView.reloadData()
+                                       
 
                                     }
                                 }else{
@@ -93,14 +116,16 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                         if let objectsr = objectsr   {
                             for objectr in objectsr {
                                 print("remoteid : \(objectr)")
-                                
+                                self.firstTableView.beginUpdates()
                                 self.elements.insertObject(objectr, atIndex: 0)
-
+                                let indexPath = NSIndexPath(forRow: 0, inSection: 1)
+                                
+                                self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                                self.firstTableView.endUpdates()
                                  objectr.pinInBackground()
                                 NSUserDefaults.standardUserDefaults().setObject(objectr.createdAt, forKey: "last_insert")
                                 NSUserDefaults.standardUserDefaults().synchronize()
                                 
-                                self.firstTableView.reloadData()
 
                             }
                         }else{
@@ -117,14 +142,27 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         
         //elements.addObjectsFromArray(allObjectArray.subarrayWithRange(NSMakeRange(0, 20)))
 
+        if self.refreshControl.refreshing{
+            self.refreshControl.endRefreshing()
 
+        }
 
     }
+    
+    func tableView( tableView : UITableView,  titleForHeaderInSection section: Int)->String?
+    {
+        if section == 0{
+            return "sas11"
+        }
+        return "sas"
+        
+    }
+    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 2
     }
     override func viewWillAppear(animated: Bool) {
         if PFUser.currentUser() != nil {
@@ -147,9 +185,20 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
+        if section==0{
+            return 1
+        }
         return elements.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
+        if indexPath.section==0{
+            let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel!.text = "11"
+
+            return cell
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
         let recipe = elements.objectAtIndex(indexPath.row) as! PFObject
         cell.textLabel!.text = recipe.objectForKey("name") as? String
@@ -169,7 +218,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     }
     
      func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
        /* nextpage = elements.count - 5
         if indexPath.row == nextpage {
             currentPage++
