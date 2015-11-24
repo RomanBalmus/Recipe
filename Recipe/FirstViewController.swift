@@ -8,10 +8,11 @@
 
 import UIKit
 
-class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource {
-    var allObjectArray: NSMutableArray = []
+class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource{
+    let videos = generateRandomData()
     var elements: NSMutableArray = []
     var refreshControl:UIRefreshControl!
+    var storedOffsets = [Int: CGFloat]()
     @IBOutlet weak var firstTableView: UITableView!
     var currentPage = 0
     var nextpage = 0
@@ -34,6 +35,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.firstTableView.addSubview(refreshControl)
         
+        
     }
     func refresh(sender:AnyObject)
     {
@@ -51,6 +53,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         let localquery = PFQuery(className:"Recipes")
         localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
+        localquery.limit=20
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             
@@ -81,6 +84,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                        // if localLast.createdAt!.isLessThanDate(remotelast) || localLast.createdAt!.isEqualToDateExtension(remotelast){
                             let syncquery = PFQuery(className:"Recipes")
                             syncquery.whereKey("createdAt", greaterThan: remotelast)
+                            syncquery.limit=20
                             syncquery.findObjectsInBackgroundWithBlock {
                                 (objectss:[PFObject]?, errors: NSError?) -> Void in
                                 
@@ -110,6 +114,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                     
                 }else{
                     let remotequery = PFQuery(className:"Recipes")
+                    remotequery.limit=20
                     remotequery.findObjectsInBackgroundWithBlock {
                         (objectsr:[PFObject]?, errorr: NSError?) -> Void in
                         
@@ -186,7 +191,9 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         if section==0{
-            return 1
+            
+            return videos.count
+            
         }
         return elements.count
     }
@@ -194,8 +201,8 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         
         
         if indexPath.section==0{
-            let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel!.text = "11"
+            let cell = tableView.dequeueReusableCellWithIdentifier("videoCell", forIndexPath: indexPath) as! VideoCell
+           
 
             return cell
         }
@@ -218,13 +225,18 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     }
     
      func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-       /* nextpage = elements.count - 5
-        if indexPath.row == nextpage {
-            currentPage++
-            nextpage = elements.count - 5
-            elements.addObjectsFromArray(allObjectArray.subarrayWithRange(NSMakeRange(currentPage, 20)))
-            tableView.reloadData()
-        }*/
+        
+        guard let tableViewCell = cell as? VideoCell else { return }
+        
+        tableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+        tableViewCell.collectionViewOffset = storedOffsets[indexPath.row] ?? 0
+    }
+    
+     func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        guard let tableViewCell = cell as? VideoCell else { return }
+        
+        storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
     }
     
 
@@ -235,6 +247,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
 
 
 }
+
 extension NSDate
 {
     func isGreaterThanDate(dateToCompare : NSDate) -> Bool
@@ -304,5 +317,24 @@ extension NSDate
         //Return Result
         return dateWithHoursAdded
     }
+    
+    
+   
 }
-
+extension FirstViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return videos[collectionView.tag].count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cCell", forIndexPath: indexPath)
+        
+        cell.backgroundColor = videos[collectionView.tag][indexPath.item]
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
+    }
+}

@@ -53,5 +53,6 @@ class Utilities {
             application.registerForRemoteNotificationTypes(types)
         }
     }
+    
 }
 
