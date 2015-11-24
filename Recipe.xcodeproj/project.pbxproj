@@ -52,6 +52,8 @@
 		426A8A451BFF6B3100249AF1 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 426A8A431BFF6B3100249AF1 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		426A8A471BFF6BB400249AF1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426A8A461BFF6BB400249AF1 /* FacebookSDK.framework */; };
 		429972391C0377C300C4FE60 /* FirstDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429972381C0377C300C4FE60 /* FirstDetailViewController.swift */; };
+		42B0667F1C04BF950048244B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B0667E1C04BF940048244B /* SearchViewController.swift */; };
+		42B066831C04C4500048244B /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B066821C04C4500048244B /* SearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +147,8 @@
 		426A8A431BFF6B3100249AF1 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Alamofire.framework; path = "/Users/Programmer/Library/Developer/Xcode/DerivedData/Recipe-dfwmdzcgizvnplafcqghkyrgzekp/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<absolute>"; };
 		426A8A461BFF6BB400249AF1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		429972381C0377C300C4FE60 /* FirstDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstDetailViewController.swift; sourceTree = "<group>"; };
+		42B0667E1C04BF940048244B /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		42B066821C04C4500048244B /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		D9A30AFD14CD66E3404A37D1 /* libPods-Recipe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Recipe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC54DB9E0F5F77CEA70DB98E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -188,6 +192,7 @@
 				425D21C61C04535100B381FC /* TodayRecipe.swift */,
 				425D21C81C04571C00B381FC /* TodayRecipe.xib */,
 				425D21CC1C0472F100B381FC /* VideoCell.swift */,
+				42B066821C04C4500048244B /* SearchCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -230,6 +235,8 @@
 		426A899A1BFF22DE00249AF1 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				42B0667D1C04BF590048244B /* SearchControllers */,
+				42B0667C1C04BF1B0048244B /* MainControllers */,
 				42B0667A1C04B0EE0048244B /* DetailControllers */,
 				425D21C41C0452F400B381FC /* Cells */,
 				426A8A3E1BFF688300249AF1 /* Resources */,
@@ -238,11 +245,6 @@
 				426A89E31BFF361F00249AF1 /* RegisterViewController.swift */,
 				426A89E01BFF35FB00249AF1 /* WelcomeViewController.swift */,
 				426A899B1BFF22DE00249AF1 /* AppDelegate.swift */,
-				426A899D1BFF22DE00249AF1 /* FirstViewController.swift */,
-				426A899F1BFF22DE00249AF1 /* SecondViewController.swift */,
-				426A89AF1BFF256500249AF1 /* ThirdViewController.swift */,
-				426A89B11BFF257200249AF1 /* FourthViewController.swift */,
-				426A89B31BFF257E00249AF1 /* FifthViewController.swift */,
 				426A89A11BFF22DE00249AF1 /* Main.storyboard */,
 				426A89A41BFF22DE00249AF1 /* Assets.xcassets */,
 				426A89A61BFF22DE00249AF1 /* LaunchScreen.storyboard */,
@@ -316,6 +318,26 @@
 				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 			);
 			name = DetailControllers;
+			sourceTree = "<group>";
+		};
+		42B0667C1C04BF1B0048244B /* MainControllers */ = {
+			isa = PBXGroup;
+			children = (
+				426A899D1BFF22DE00249AF1 /* FirstViewController.swift */,
+				426A899F1BFF22DE00249AF1 /* SecondViewController.swift */,
+				426A89AF1BFF256500249AF1 /* ThirdViewController.swift */,
+				426A89B11BFF257200249AF1 /* FourthViewController.swift */,
+				426A89B31BFF257E00249AF1 /* FifthViewController.swift */,
+			);
+			name = MainControllers;
+			sourceTree = "<group>";
+		};
+		42B0667D1C04BF590048244B /* SearchControllers */ = {
+			isa = PBXGroup;
+			children = (
+				42B0667E1C04BF940048244B /* SearchViewController.swift */,
+			);
+			name = SearchControllers;
 			sourceTree = "<group>";
 		};
 		6BE1DFAC8A8BCA85419EFEFB /* Frameworks */ = {
@@ -437,9 +459,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				426A8A281BFF5ECB00249AF1 /* PushNotification.swift in Sources */,
+				42B066831C04C4500048244B /* SearchCell.swift in Sources */,
 				426A89E51BFF361F00249AF1 /* RegisterViewController.swift in Sources */,
 				429972391C0377C300C4FE60 /* FirstDetailViewController.swift in Sources */,
 				426A89B41BFF257E00249AF1 /* FifthViewController.swift in Sources */,
+				42B0667F1C04BF950048244B /* SearchViewController.swift in Sources */,
 				426A89EB1BFF3A7A00249AF1 /* ProgressHUD.m in Sources */,
 				425D21C71C04535100B381FC /* TodayRecipe.swift in Sources */,
 				426A8A2B1BFF5EF100249AF1 /* Constants.swift in Sources */,

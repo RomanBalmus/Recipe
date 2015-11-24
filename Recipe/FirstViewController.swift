@@ -10,7 +10,7 @@ import UIKit
 
 class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource, UISearchBarDelegate{
     let videos = generateRandomData()
-    var resultSearchController = UISearchController()
+    var resultSearchController : UISearchController!
     var elements: NSMutableArray = []
     var refreshControl:UIRefreshControl!
     var storedOffsets = [Int: CGFloat]()
@@ -30,36 +30,16 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController)
-    {
-       
-    }
     func showSearchBar() {
-        /*self.resultSearchController.searchBar.alpha=0
-        
-        self.view.addSubview(self.resultSearchController.searchBar)
-        //navigationItem.setRightBarButtonItem(nil, animated: true)
-        UIView.animateWithDuration(0.5, animations: {
-            self.resultSearchController.searchBar.alpha=1
-            }, completion: { finished in
-                self.searchActive = true
-                self.resultSearchController.searchBar.becomeFirstResponder()
-
-        })*/
-        self.resultSearchController = UISearchController(searchResultsController: nil)
-        self.resultSearchController.hidesNavigationBarDuringPresentation = false
-        self.resultSearchController.searchBar.delegate = self
-        self.resultSearchController.dimsBackgroundDuringPresentation = false
+  
+   
         presentViewController(resultSearchController, animated: true, completion: nil)
         self.searchActive = true
 
     }
     
     func hideSearchBar() {
-        //navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
-        // logoImageView.alpha = 0
-        //self.resultSearchController.searchBar.alpha=0
-        //self.resultSearchController.removeFromParentViewController()
+       
         self.resultSearchController.dismissViewControllerAnimated(true, completion: nil)
 
         UIView.animateWithDuration(0.3, animations: {
@@ -78,11 +58,29 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")
-        hideSearchBar()
+        //hideSearchBar()
+        self.resultSearchController.dismissViewControllerAnimated(true, completion: {
+            let searchController = self.storyboard?.instantiateViewControllerWithIdentifier("SEARCH_VIEW_CONTROLLER") as? SearchViewController
+            searchController?.setSearchTextReady(searchBar.text! as String)
+            self.navigationController?.pushViewController(searchController!, animated: true)
+        })
+
+       
         
+    }
+    deinit{
+        if let superView = resultSearchController.view.superview
+        {
+            superView.removeFromSuperview()
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        self.resultSearchController = UISearchController(searchResultsController: nil)
+        self.resultSearchController.hidesNavigationBarDuringPresentation = false
+        self.resultSearchController.searchBar.delegate = self
+        self.resultSearchController.dimsBackgroundDuringPresentation = false
        /* self.resultSearchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.dimsBackgroundDuringPresentation = false
