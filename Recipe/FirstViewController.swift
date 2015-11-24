@@ -8,16 +8,92 @@
 
 import UIKit
 
-class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource{
+class FirstViewController : UIViewController , UITableViewDelegate , UITableViewDataSource, UISearchBarDelegate{
     let videos = generateRandomData()
+    var resultSearchController = UISearchController()
     var elements: NSMutableArray = []
     var refreshControl:UIRefreshControl!
     var storedOffsets = [Int: CGFloat]()
     @IBOutlet weak var firstTableView: UITableView!
     var currentPage = 0
     var nextpage = 0
+    @IBOutlet weak var searchBarButtonItem: UIBarButtonItem!
+    var searchActive : Bool = false
+    @IBAction func searcBarButtonItemClicked(sender: AnyObject) {
+        
+        if searchActive{
+           hideSearchBar()
+
+        }else{
+            showSearchBar()
+        }
+        
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController)
+    {
+       
+    }
+    func showSearchBar() {
+        /*self.resultSearchController.searchBar.alpha=0
+        
+        self.view.addSubview(self.resultSearchController.searchBar)
+        //navigationItem.setRightBarButtonItem(nil, animated: true)
+        UIView.animateWithDuration(0.5, animations: {
+            self.resultSearchController.searchBar.alpha=1
+            }, completion: { finished in
+                self.searchActive = true
+                self.resultSearchController.searchBar.becomeFirstResponder()
+
+        })*/
+        self.resultSearchController = UISearchController(searchResultsController: nil)
+        self.resultSearchController.hidesNavigationBarDuringPresentation = false
+        self.resultSearchController.searchBar.delegate = self
+        self.resultSearchController.dimsBackgroundDuringPresentation = false
+        presentViewController(resultSearchController, animated: true, completion: nil)
+        self.searchActive = true
+
+    }
+    
+    func hideSearchBar() {
+        //navigationItem.setRightBarButtonItem(searchBarButtonItem, animated: true)
+        // logoImageView.alpha = 0
+        //self.resultSearchController.searchBar.alpha=0
+        //self.resultSearchController.removeFromParentViewController()
+        self.resultSearchController.dismissViewControllerAnimated(true, completion: nil)
+
+        UIView.animateWithDuration(0.3, animations: {
+            
+            }, completion: { finished in
+               self.searchActive = false
+        })
+    }
+    
+    
+    
+    //MARK: UISearchBarDelegate
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print("cancel")
+        hideSearchBar()
+    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("done clicked \(searchBar.text)")
+        hideSearchBar()
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+       /* self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.dimsBackgroundDuringPresentation = false
+            controller.hidesNavigationBarDuringPresentation=false
+            controller.searchBar.sizeToFit()
+            controller.searchBar.delegate = self;
+            
+            
+            //self.navigationItem.titleView = controller.searchBar
+            return controller
+        })()*/
         // Do any additional setup after loading the view, typically from a nib.
         self.firstTableView.dataSource=self
         self.firstTableView.delegate=self
@@ -53,7 +129,9 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         let localquery = PFQuery(className:"Recipes")
         localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
-        localquery.limit=20
+        let lastWeekDate = NSCalendar.currentCalendar().dateByAddingUnit(.WeekOfYear, value: -1, toDate: NSDate(), options: NSCalendarOptions())!
+                print(lastWeekDate)
+        localquery.whereKey("createdAt", greaterThan: lastWeekDate)
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             
@@ -84,7 +162,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                        // if localLast.createdAt!.isLessThanDate(remotelast) || localLast.createdAt!.isEqualToDateExtension(remotelast){
                             let syncquery = PFQuery(className:"Recipes")
                             syncquery.whereKey("createdAt", greaterThan: remotelast)
-                            syncquery.limit=20
                             syncquery.findObjectsInBackgroundWithBlock {
                                 (objectss:[PFObject]?, errors: NSError?) -> Void in
                                 
@@ -114,7 +191,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                     
                 }else{
                     let remotequery = PFQuery(className:"Recipes")
-                    remotequery.limit=20
                     remotequery.findObjectsInBackgroundWithBlock {
                         (objectsr:[PFObject]?, errorr: NSError?) -> Void in
                         
@@ -197,6 +273,8 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         }
         return elements.count
     }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
@@ -209,6 +287,12 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
         let recipe = elements.objectAtIndex(indexPath.row) as! PFObject
         cell.textLabel!.text = recipe.objectForKey("name") as? String
+        
+        
+        /*NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"hh:mm a"];  // 09:30 AM
+        [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:1]]; // For GMT+1
+        NSString *time = [formatter stringFromDate:[NSDate date]];*/
         return cell
     }
     
@@ -239,7 +323,14 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         storedOffsets[indexPath.row] = tableViewCell.collectionViewOffset
     }
     
-
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section==0{
+            return 100
+        }
+        return UITableViewAutomaticDimension
+    }
+    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -337,4 +428,5 @@ extension FirstViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
     }
+    
 }

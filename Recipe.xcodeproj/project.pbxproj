@@ -230,6 +230,7 @@
 		426A899A1BFF22DE00249AF1 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				42B0667A1C04B0EE0048244B /* DetailControllers */,
 				425D21C41C0452F400B381FC /* Cells */,
 				426A8A3E1BFF688300249AF1 /* Resources */,
 				426A8A1F1BFF5EB600249AF1 /* Utilities */,
@@ -242,7 +243,6 @@
 				426A89AF1BFF256500249AF1 /* ThirdViewController.swift */,
 				426A89B11BFF257200249AF1 /* FourthViewController.swift */,
 				426A89B31BFF257E00249AF1 /* FifthViewController.swift */,
-				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 				426A89A11BFF22DE00249AF1 /* Main.storyboard */,
 				426A89A41BFF22DE00249AF1 /* Assets.xcassets */,
 				426A89A61BFF22DE00249AF1 /* LaunchScreen.storyboard */,
@@ -308,6 +308,14 @@
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		42B0667A1C04B0EE0048244B /* DetailControllers */ = {
+			isa = PBXGroup;
+			children = (
+				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
+			);
+			name = DetailControllers;
 			sourceTree = "<group>";
 		};
 		6BE1DFAC8A8BCA85419EFEFB /* Frameworks */ = {
