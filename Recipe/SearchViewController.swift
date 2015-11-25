@@ -152,7 +152,16 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
         return cell
     }
    
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        let object = elements[indexPath.row] as! PFObject
+        let detail = self.storyboard?.instantiateViewControllerWithIdentifier("FIRST_DETAIL_VIEW_CONTROLLER") as? FirstDetailViewController
+       // detail?.setSearchTextReady(searchBar.text! as String)
+        detail!.detailItem = object
+
+        self.navigationController?.pushViewController(detail!, animated: true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

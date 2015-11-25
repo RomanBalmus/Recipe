@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstructionsViewController" customModule="Recipe" customModuleProvider="target">
+            <connections>
+                <outlet property="instrucTableView" destination="qPK-L7-NXR" id="taM-2Z-jge"/>
+                <outlet property="view" destination="HmH-3W-9h3" id="eYP-uZ-F0p"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="HmH-3W-9h3">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qPK-L7-NXR">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="JL3-3X-QSw"/>
+                        <outlet property="delegate" destination="-1" id="pe5-6V-CaI"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qPK-L7-NXR" secondAttribute="bottom" id="2xg-js-CJb"/>
+                <constraint firstAttribute="trailing" secondItem="qPK-L7-NXR" secondAttribute="trailing" id="RTn-wj-ZAF"/>
+                <constraint firstItem="qPK-L7-NXR" firstAttribute="top" secondItem="HmH-3W-9h3" secondAttribute="top" id="Tmo-A8-re4"/>
+                <constraint firstItem="qPK-L7-NXR" firstAttribute="leading" secondItem="HmH-3W-9h3" secondAttribute="leading" id="tJb-gj-euv"/>
+            </constraints>
+            <point key="canvasLocation" x="739" y="265"/>
+        </view>
+    </objects>
+</document>

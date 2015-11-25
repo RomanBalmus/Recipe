@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InfoViewController" customModule="Recipe" customModuleProvider="target">
+            <connections>
+                <outlet property="infoTableView" destination="avE-dv-vrb" id="yIS-c3-QWM"/>
+                <outlet property="view" destination="1Jd-EW-fou" id="4hT-pc-OFO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1Jd-EW-fou">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="avE-dv-vrb">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="TTJ-NX-CNH"/>
+                        <outlet property="delegate" destination="-1" id="yr0-5b-R5f"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="avE-dv-vrb" secondAttribute="trailing" id="9HC-L2-QnX"/>
+                <constraint firstAttribute="bottom" secondItem="avE-dv-vrb" secondAttribute="bottom" id="YDf-7e-cN3"/>
+                <constraint firstItem="avE-dv-vrb" firstAttribute="top" secondItem="1Jd-EW-fou" secondAttribute="top" id="cBa-2h-FP1"/>
+                <constraint firstItem="avE-dv-vrb" firstAttribute="leading" secondItem="1Jd-EW-fou" secondAttribute="leading" id="scA-Ed-XBY"/>
+            </constraints>
+            <point key="canvasLocation" x="688" y="187"/>
+        </view>
+    </objects>
+</document>

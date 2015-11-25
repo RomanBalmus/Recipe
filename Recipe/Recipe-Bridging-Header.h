@@ -13,5 +13,7 @@
 #import <ParseUI/ParseUI.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "SDWebImage/UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"
 
 #endif /* Recipe_Bridging_Header_h */

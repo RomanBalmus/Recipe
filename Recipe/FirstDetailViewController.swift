@@ -7,37 +7,83 @@
 //
 
 import Foundation
-class FirstDetailViewController: UIViewController {
+class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
+   var detailItem : AnyObject?
     
-    var detailItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
-    }
-    
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = self.detailItem {
-            let cv = detail.relationForKey("Ingredient_id")
-            //print("cv \(cv)")
-            cv.query()!.findObjectsInBackgroundWithBlock {
-                (robjects:[PFObject]?, error: NSError?) -> Void in
-                if let robjects = robjects   {
-                    for robject in robjects{
-                        print("robject \(robject)")
-                    }
-                }
-                
-            }
-        }
-    }
 
+
+    func initPageMenu(object: AnyObject){
+        // Array to keep track of controllers in page menu
+        var controllerArray : [UIViewController] = []
+        
+        // Create variables for all view controllers you want to put in the
+        // page menu, initialize them, and add each to the controller array.
+        // (Can be any UIViewController subclass)
+        // Make sure the title property of all view controllers is set
+        // Example:
+        let info : InfoViewController = InfoViewController(nibName: "InfoViewController", bundle: nil)  //info
+        info.title = "INFO"
+        info.detailItem=object
+        controllerArray.append(info)
+        
+        let ingredients : IngredientViewController = IngredientViewController(nibName: "IngredientViewController", bundle: nil) //ingredients
+        ingredients.title = "INGREDIENTI"
+        ingredients.detailItem=object
+        controllerArray.append(ingredients)
+       
+        let instruction : InstructionsViewController = InstructionsViewController(nibName: "InstructionsViewController", bundle: nil) //instruction
+        instruction.title = "ISTRUZIONI"
+        instruction.detailItem=object
+        controllerArray.append(instruction)
+        
+        
+        // Customize page menu to your liking (optional) or use default settings by sending nil for 'options' in the init
+        // Example:
+        let parameters: [CAPSPageMenuOption] = [
+            .MenuItemSeparatorWidth(4.3),
+            .UseMenuLikeSegmentedControl(true),
+            .MenuItemSeparatorPercentageHeight(0.1),
+            .MenuItemFont(UIFont(name: "HelveticaNeue", size: 13.0)!),
+            .MenuHeight(40.0),
+            .CenterMenuItems(true)
+        ]
+        
+        // Initialize page menu with controller array, frame, and optional parameters
+      let  pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu.bottomMenuHairlineColor=UIColor.randomColor()
+        pageMenu.menuItemSeparatorColor=UIColor.randomColor()
+        pageMenu.unselectedMenuItemLabelColor=UIColor.randomColor()
+        pageMenu.selectedMenuItemLabelColor=UIColor.randomColor()
+        pageMenu.selectionIndicatorColor=UIColor.randomColor()
+        pageMenu.scrollMenuBackgroundColor=UIColor.randomColor()
+        pageMenu.viewBackgroundColor=UIColor.randomColor()
+        pageMenu.menuScrollView.backgroundColor=UIColor.randomColor()
+        pageMenu.delegate=self
+        // Lastly add page menu as subview of base view controller view
+        // or use pageMenu controller in you view hierachy as desired
+        self.addChildViewController(pageMenu)
+        self.view.addSubview(pageMenu.view)
+        
+        pageMenu.didMoveToParentViewController(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+      
+        self.initPageMenu(detailItem!)
+
+       // self.configureView()
         
-        //self.configureView()
+        
+        
+    }
+    func willMoveToPage(controller: UIViewController, index: Int){
+      
+    }
+    
+    func didMoveToPage(controller: UIViewController, index: Int){
+        
     }
     
     override func didReceiveMemoryWarning() {
