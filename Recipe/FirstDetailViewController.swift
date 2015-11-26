@@ -70,12 +70,22 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-      
+        let saveBtn = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: "buttonMethod") //Use a selector
+        navigationItem.rightBarButtonItem = saveBtn
         self.initPageMenu(detailItem!)
 
        // self.configureView()
         
         
+        
+    }
+    func buttonMethod() {
+        print("save")
+        
+        let usr = PFUser.currentUser()!
+        let rel = usr.relationForKey("Favorites")
+        rel.addObject(self.detailItem as! PFObject)
+        usr.saveInBackground()
         
     }
     func willMoveToPage(controller: UIViewController, index: Int){

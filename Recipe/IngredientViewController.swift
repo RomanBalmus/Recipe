@@ -25,12 +25,13 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         if let detail = self.detailItem {
             let cv = detail.relationForKey("compositionId") 
             let qcv = cv.query()!
-            qcv.orderByDescending("createdAt")
+            qcv.orderByAscending("createdAt")
             qcv.findObjectsInBackgroundWithBlock {
                 (robjects:[PFObject]?, error: NSError?) -> Void in
                 if let robjects = robjects   {
                     for robject in robjects{
                         let compos = Compos(compos: robject)
+                        robject.pinInBackground()
 
                         let ingrRel = robject.relationForKey("ingredientId")
                         let ingrque = ingrRel.query()
@@ -40,18 +41,20 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
                             if let ingObjcts = ingObjcts{
                                 
                                 for ingrd in ingObjcts{
-                                    
+                                    ingrd.pinInBackground()
+
                                     compos.addIngredient(ingrd)
+                                    self.ingredTableView.reloadData()
+
                                 }
                                 
                             
-                                self.elements.addObject(compos)
-                                self.ingredTableView.reloadData()
+                              
                             }
                             
                         }
                         
-                        
+                        self.elements.addObject(compos)
                     }
                 }
                 
@@ -68,7 +71,7 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         //self.ingredTableView.delegate=self
         let rect = CGRectMake(0, 0, self.view.frame.size.width, 44)
          doseLbl.frame=rect
-    
+        
         self.doseLbl.text = "Dosi per \((self.detailItem as! PFObject).valueForKey("dose") as! String)"
 
         self.ingredTableView.tableHeaderView=doseLbl

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		421243011C005F910044A5CD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421243001C005F910044A5CD /* FBSDKCoreKit.framework */; };
+		421809E11C071FC900A627FC /* CategorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421809E01C071FC900A627FC /* CategorySearchViewController.swift */; };
+		421809E41C07221C00A627FC /* SecondSubCatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */; };
 		4222839D1C05A5910050BE7B /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4222839C1C05A5910050BE7B /* CAPSPageMenu.swift */; };
 		422283A11C05A7E00050BE7B /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422283A01C05A7E00050BE7B /* InfoViewController.swift */; };
 		422283A31C05A7F70050BE7B /* IngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422283A21C05A7F70050BE7B /* IngredientViewController.swift */; };
@@ -121,6 +123,8 @@
 
 /* Begin PBXFileReference section */
 		421243001C005F910044A5CD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		421809E01C071FC900A627FC /* CategorySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySearchViewController.swift; sourceTree = "<group>"; };
+		421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSubCatDetailViewController.swift; sourceTree = "<group>"; };
 		4222839C1C05A5910050BE7B /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		422283A01C05A7E00050BE7B /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		422283A21C05A7F70050BE7B /* IngredientViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientViewController.swift; sourceTree = "<group>"; };
@@ -453,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
+				421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */,
 			);
 			name = DetailControllers;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 			isa = PBXGroup;
 			children = (
 				42B0667E1C04BF940048244B /* SearchViewController.swift */,
+				421809E01C071FC900A627FC /* CategorySearchViewController.swift */,
 			);
 			name = SearchControllers;
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				421809E41C07221C00A627FC /* SecondSubCatDetailViewController.swift in Sources */,
 				425215591C061B4800D2C712 /* UIView+WebCacheOperation.m in Sources */,
 				426A8A281BFF5ECB00249AF1 /* PushNotification.swift in Sources */,
 				42B066831C04C4500048244B /* SearchCell.swift in Sources */,
@@ -614,6 +621,7 @@
 				425215521C061B4800D2C712 /* SDWebImagePrefetcher.m in Sources */,
 				422283A51C05A8060050BE7B /* InstructionsViewController.swift in Sources */,
 				42B0667F1C04BF950048244B /* SearchViewController.swift in Sources */,
+				421809E11C071FC900A627FC /* CategorySearchViewController.swift in Sources */,
 				426A89EB1BFF3A7A00249AF1 /* ProgressHUD.m in Sources */,
 				425215551C061B4800D2C712 /* UIImage+MultiFormat.m in Sources */,
 				4252151F1C05BE7200D2C712 /* InfoCell.swift in Sources */,

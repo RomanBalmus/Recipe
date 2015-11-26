@@ -19,13 +19,16 @@ class InstructionsViewController: UIViewController , UITableViewDelegate , UITab
         if let detail = self.detailItem {
             let cv = detail.relationForKey("instructionsId")
             //print("cv \(cv)")
-            cv.query()!.findObjectsInBackgroundWithBlock {
+            let qcv = cv.query()!
+            qcv.orderByDescending("createdAt")
+            qcv.findObjectsInBackgroundWithBlock {
                 (robjects:[PFObject]?, error: NSError?) -> Void in
                 if let robjects = robjects   {
                     for robject in robjects{
                         //print("instruct \(robject)")
                         self.elements.addObject(robject)
-                        
+                        robject.pinInBackground()
+
                         
                     }
                     
@@ -70,7 +73,7 @@ class InstructionsViewController: UIViewController , UITableViewDelegate , UITab
         
         
         
-        let imgs = instr.objectForKey("images") as! NSMutableArray
+        if let imgs = instr.objectForKey("images") as? NSMutableArray{
         for var index = 0; index < imgs.count; ++index {
             let urlstr = imgs.objectAtIndex(index) as! String
             let url = NSURL(string: urlstr)
@@ -88,7 +91,7 @@ class InstructionsViewController: UIViewController , UITableViewDelegate , UITab
 
             }
         }
-        
+    }
         /*NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"hh:mm a"];  // 09:30 AM
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:1]]; // For GMT+1

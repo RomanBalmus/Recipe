@@ -1,20 +1,18 @@
 //
-//  SearchViewController.swift
+//  SecondDetailViewController.swift
 //  Recipe
 //
-//  Created by iOS on 24/11/15.
+//  Created by iOS on 26/11/15.
 //  Copyright © 2015 iOS. All rights reserved.
 //
 
 import Foundation
-class SearchViewController: UIViewController, UITableViewDelegate , UITableViewDataSource, UISearchBarDelegate {
+class SecondSubCatDetailViewController : UIViewController, UITableViewDelegate , UITableViewDataSource, UISearchBarDelegate {
+    var detailItem : AnyObject?
     var resultSearchController : UISearchController!
     var elements: NSMutableArray = []
-    
-    var searchText : String!
-    
+    var refreshControl:UIRefreshControl!
     @IBOutlet weak var firstTableView: UITableView!
-
     @IBOutlet weak var searchBarButtonItem: UIBarButtonItem!
     var searchActive : Bool = false
     @IBAction func searcBarButtonItemClicked(sender: AnyObject) {
@@ -26,10 +24,6 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
             showSearchBar()
         }
         
-    }
-    
-    func setSearchTextReady(searchTxt:String){
-        self.searchText=searchTxt
     }
     
     func showSearchBar() {
@@ -60,28 +54,15 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")
-        hideSearchBar()
-        self.searchText=searchBar.text
-        parseData(self.searchText)
-
-        
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("search q: \(self.searchText)")
-        self.resultSearchController = UISearchController(searchResultsController: nil)
-        self.resultSearchController.hidesNavigationBarDuringPresentation = false
-        self.resultSearchController.searchBar.delegate = self
-        self.resultSearchController.dimsBackgroundDuringPresentation = false
-        self.firstTableView.dataSource=self
-        self.firstTableView.delegate=self
-        
-        self.firstTableView.estimatedRowHeight=100
-        self.firstTableView.rowHeight=UITableViewAutomaticDimension
+        //hideSearchBar()
+        self.resultSearchController.dismissViewControllerAnimated(true, completion: {
+            self.searchActive=false
+            let searchController = self.storyboard?.instantiateViewControllerWithIdentifier("CATEGORY_SEARCH_VIEW_CONTROLLER") as? CategorySearchViewController
+            searchController?.setSearchTextReady(searchBar.text! as String,obj: self.detailItem as! PFObject)
+            self.navigationController?.pushViewController(searchController!, animated: true)
+        })
         
         
-        parseData(self.searchText)
         
     }
     deinit{
@@ -90,20 +71,44 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
             superView.removeFromSuperview()
         }
     }
-    func parseData(queTxt: String){
-        if elements.count>0{
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.resultSearchController = UISearchController(searchResultsController: nil)
+        self.resultSearchController.hidesNavigationBarDuringPresentation = false
+        self.resultSearchController.searchBar.delegate = self
+        self.resultSearchController.dimsBackgroundDuringPresentation = false
+        self.firstTableView.dataSource=self
+        self.firstTableView.delegate=self
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.firstTableView.addSubview(refreshControl)
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "searcBarButtonItemClicked:") //Use a selector
+        navigationItem.rightBarButtonItem = searchButton
+        parseData()
+    }
+    func refresh(sender:AnyObject)
+    {
+        // Code to refresh table view
+        if elements.count > 0{
             elements.removeAllObjects()
-            self.firstTableView.reloadData()
+            
         }
-        let localquery = PFQuery(className:"Recipes")
-        localquery.fromLocalDatastore()
+        self.firstTableView.reloadData()
+        parseData()
+    }
+   
+    func parseData(){
+        
+        let rel = (self.detailItem as! PFObject).relationForKey("sub_categoryId")
+        let localquery = rel.query()!
         localquery.orderByAscending("createdAt")
-        localquery.whereKey("name", matchesRegex: queTxt, modifiers: "i")
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             if error == nil {
                 // The find succeeded.
-                print("Successfully retrieved \(objects!.count) recipes.")
+                print("Successfully retrieved \(objects!.count) sub cat.")
                 if objects?.count > 0 {
                     if let objects = objects   {
                         for object in objects {
@@ -116,34 +121,43 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
                             self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                             self.firstTableView.endUpdates()
                         }
-                        self.title="\(self.elements.count) matches found"
                     }
                 }else{
                     print("no matches")
-                    self.title="\(self.elements.count) matches found"
-
+                    
                 }
-            
+                
             }else{
                 print("error get search \(error?.userInfo)")
             }
         }
+        if self.refreshControl.refreshing{
+            self.refreshControl.endRefreshing()
+            
+        }
+        
     }
+    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-       
+     
         return elements.count
     }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-       
-        let cell = tableView.dequeueReusableCellWithIdentifier("searchCell", forIndexPath: indexPath) as! SearchCell
+    
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
         let recipe = elements.objectAtIndex(indexPath.row) as! PFObject
-        cell.title.text = recipe.objectForKey("name") as? String
+        cell.textLabel!.text = recipe.objectForKey("name") as? String
         
         
         /*NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -152,20 +166,5 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
         NSString *time = [formatter stringFromDate:[NSDate date]];*/
         return cell
     }
-   
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        let object = elements[indexPath.row] as! PFObject
-        let detail = self.storyboard?.instantiateViewControllerWithIdentifier("FIRST_DETAIL_VIEW_CONTROLLER") as? FirstDetailViewController
-       // detail?.setSearchTextReady(searchBar.text! as String)
-        detail!.detailItem = object
-
-        self.navigationController?.pushViewController(detail!, animated: true)
-    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

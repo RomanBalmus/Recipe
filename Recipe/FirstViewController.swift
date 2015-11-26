@@ -147,6 +147,8 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                             
                             self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                             self.firstTableView.endUpdates()
+                            object.pinInBackground()
+
                             print("localid : \(object.objectId)")
                             
                             
@@ -301,7 +303,12 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
             if let indexPath = self.firstTableView.indexPathForSelectedRow {
                 let object = elements[indexPath.row] as! PFObject
                 let controller = segue.destinationViewController as! FirstDetailViewController
+                
+                if controller.detailItem != nil{
+                    controller.detailItem = nil
+                }
                 controller.detailItem = object
+
                 
             }
         }
