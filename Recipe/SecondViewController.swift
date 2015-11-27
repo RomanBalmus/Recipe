@@ -89,22 +89,24 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
         self.firstTableView.addSubview(refreshControl)
         
         
-        if elements.count==0{
-            parseData()
-        }
+       
     }
     func refresh(sender:AnyObject)
     {
-        // Code to refresh table view
-        if elements.count > 0{
-            elements.removeAllObjects()
-            self.firstTableView.reloadData()
+       
 
-        }
+        
+        parseData()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         parseData()
     }
     func parseData(){
-      
+        if elements.count > 0 {
+            elements.removeAllObjects()
+            self.firstTableView.reloadData()
+        }
         let localquery = PFQuery(className:"Category")
         localquery.fromLocalDatastore()
         localquery.orderByDescending("name")
