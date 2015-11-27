@@ -59,6 +59,8 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         print("cancel")
+        self.searchText = nil
+
         hideSearchBar()
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -103,9 +105,9 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
        // let cat = self.searchObj!.valueForKey("categoryId") as! String
         
         
-        let localquery = self.searchObj.relationForKey("sub_categoryId").query()!
+        let localquery = self.searchObj.relationForKey("sub_categoryId").query()
         localquery.orderByAscending("createdAt")
-
+        localquery.fromLocalDatastore()
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             if error == nil {
@@ -114,15 +116,19 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
                 if objects?.count > 0 {
                     if let objects = objects   {
                         for object in objects {
-                            
-                            let rq = object.relationForKey("recipeId").query()!
+                            object.pinInBackground()
+                            let rq = object.relationForKey("recipeId").query()
                             rq.orderByAscending("createdAt")
-                            rq.whereKey("name", matchesRegex: queTxt, modifiers: "i")
+                            if let txt = self.searchText {
+                               
+                                rq.whereKey("name", matchesRegex: txt, modifiers: "i")
+                            }
                             rq.findObjectsInBackgroundWithBlock {
                                 (rqobjects:[PFObject]?, error: NSError?) -> Void in
                             
                                 if let rqobjects = rqobjects   {
                                     for rqobject in rqobjects {
+                                        rqobject.pinInBackground()
                                         print("got \(rqobject.valueForKey("name"))")
                                         self.firstTableView.beginUpdates()
                                         self.elements.insertObject(rqobject, atIndex: 0)

@@ -59,6 +59,9 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         }
         
         ProgressHUD.show("Signing in...", interaction: true)
+        
+        
+        
         PFUser.logInWithUsernameInBackground(email, password: password!) { (user: PFUser?, error: NSError?) -> Void in
             if (user != nil) {
                 PushNotication.parsePushUserAssign()

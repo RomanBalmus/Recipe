@@ -24,7 +24,7 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         // Update the user interface for the detail item.
         if let detail = self.detailItem {
             let cv = detail.relationForKey("compositionId") 
-            let qcv = cv.query()!
+            let qcv = cv.query()
             qcv.orderByAscending("createdAt")
             qcv.findObjectsInBackgroundWithBlock {
                 (robjects:[PFObject]?, error: NSError?) -> Void in
@@ -35,7 +35,7 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
 
                         let ingrRel = robject.relationForKey("ingredientId")
                         let ingrque = ingrRel.query()
-                        ingrque?.findObjectsInBackgroundWithBlock{
+                        ingrque.findObjectsInBackgroundWithBlock{
                             (ingObjcts:[PFObject]?,error2: NSError?) -> Void in
                             
                             if let ingObjcts = ingObjcts{

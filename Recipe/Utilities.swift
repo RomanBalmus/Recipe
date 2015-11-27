@@ -44,14 +44,18 @@ class Utilities {
         return elapsed
     }
     class func askNotifications(application: UIApplication){
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let settings = UIUserNotificationSettings(forTypes: [ .Alert, .Badge, .Sound], categories: nil)
+        if #available(iOS 8.0, *) {
+            let types: UIUserNotificationType = [.Alert, .Badge, .Sound]
+            let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
-            let types = [UIRemoteNotificationType.Badge,UIRemoteNotificationType.Alert ,UIRemoteNotificationType.Sound] as UIRemoteNotificationType
+            let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
             application.registerForRemoteNotificationTypes(types)
         }
+        
+        
+     
     }
     
 }

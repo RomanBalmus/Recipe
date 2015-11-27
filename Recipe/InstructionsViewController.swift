@@ -19,7 +19,7 @@ class InstructionsViewController: UIViewController , UITableViewDelegate , UITab
         if let detail = self.detailItem {
             let cv = detail.relationForKey("instructionsId")
             //print("cv \(cv)")
-            let qcv = cv.query()!
+            let qcv = cv.query()
             qcv.orderByDescending("createdAt")
             qcv.findObjectsInBackgroundWithBlock {
                 (robjects:[PFObject]?, error: NSError?) -> Void in

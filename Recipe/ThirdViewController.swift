@@ -32,23 +32,23 @@ class ThirdViewController : UIViewController , UITableViewDelegate , UITableView
         getData()
     }
     func getData(){
-        if elements.count>0{
-            
+        
+        if elements.count > 0 {
+            elements.removeAllObjects()
             self.firstTableView.reloadData()
-            return
         }
+       
         let user = PFUser.currentUser()!
         let rel = user.relationForKey("Favorites")
-        let cv = rel.query()!
+        let cv = rel.query()
+        cv.fromLocalDatastore()
         cv.orderByAscending("createdAt")
         cv.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
-            print("objs \(objects)")
             
             if let objects = objects   {
                 for object in objects {
-                    print("obj \(object)")
-                    
+                    object.pinInBackground()
                     self.firstTableView.beginUpdates()
                     self.elements.insertObject(object, atIndex: 0)
                     
@@ -57,7 +57,6 @@ class ThirdViewController : UIViewController , UITableViewDelegate , UITableView
                     self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                     self.firstTableView.endUpdates()
                     
-                    print("elem \(self.elements)")
                     
                 }
             }

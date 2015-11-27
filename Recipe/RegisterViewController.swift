@@ -70,8 +70,8 @@ class RegisterViewController: UITableViewController, UITextFieldDelegate {
         
         ProgressHUD.show("Please wait...", interaction: false)
         
-        var user = PFUser()
-        user.username = email
+        let user = PFUser()
+        user.username = name
         user.password = password
         user.email = email
         user[PF_USER_EMAILCOPY] = email

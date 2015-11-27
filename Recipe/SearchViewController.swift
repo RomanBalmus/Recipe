@@ -56,7 +56,10 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
     //MARK: UISearchBarDelegate
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         print("cancel")
+        self.searchText = nil
+
         hideSearchBar()
+        
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")
@@ -98,7 +101,13 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
         let localquery = PFQuery(className:"Recipes")
         localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
-        localquery.whereKey("name", matchesRegex: queTxt, modifiers: "i")
+        if let txt = self.searchText {
+            if elements.count > 0{
+                elements.removeAllObjects()
+                self.firstTableView.reloadData()
+            }
+            localquery.whereKey("name", matchesRegex: txt, modifiers: "i")
+        }
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             if error == nil {

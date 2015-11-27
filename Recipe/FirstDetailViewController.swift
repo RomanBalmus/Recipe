@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
+import QuartzCore
+
 class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
    var detailItem : AnyObject?
-    
-
+    var currentController = UIViewController()
 
     func initPageMenu(object: AnyObject){
         // Array to keep track of controllers in page menu
@@ -86,14 +88,19 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
         let rel = usr.relationForKey("Favorites")
         rel.addObject(self.detailItem as! PFObject)
         usr.saveInBackground()
+       
         
     }
     func willMoveToPage(controller: UIViewController, index: Int){
-      
+        self.currentController = controller
+        print("ctrlwill: \(controller)")
+
     }
     
     func didMoveToPage(controller: UIViewController, index: Int){
-        
+        self.currentController = controller
+        print("ctrldid: \(controller)")
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,4 +108,17 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+}
+public extension UIWindow {
+    
+    func capture() -> UIImage {
+        
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, self.opaque, 0.0)
+        self.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
 }

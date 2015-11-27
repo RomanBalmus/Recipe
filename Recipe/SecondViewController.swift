@@ -51,6 +51,7 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         print("cancel")
         hideSearchBar()
+
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")

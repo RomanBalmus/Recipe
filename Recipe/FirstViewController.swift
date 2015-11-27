@@ -55,6 +55,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         print("cancel")
         hideSearchBar()
+
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")
@@ -149,7 +150,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                             self.firstTableView.endUpdates()
                             object.pinInBackground()
 
-                            print("localid : \(object.objectId)")
                             
                             
                         }
@@ -168,7 +168,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                                 
                                 if let objectss = objectss   {
                                     for objectsy in objectss {
-                                        print("syncqueryid : \(objectsy.objectId)")
                                         self.firstTableView.beginUpdates()
                                         self.elements.insertObject(objectsy, atIndex: 0)
                                         let indexPath = NSIndexPath(forRow: 0, inSection: 1)
@@ -197,7 +196,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                         
                         if let objectsr = objectsr   {
                             for objectr in objectsr {
-                                print("remoteid : \(objectr)")
                                 self.firstTableView.beginUpdates()
                                 self.elements.insertObject(objectr, atIndex: 0)
                                 let indexPath = NSIndexPath(forRow: 0, inSection: 1)

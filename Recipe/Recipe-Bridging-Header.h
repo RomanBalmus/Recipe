@@ -11,9 +11,13 @@
 #import "ProgressHUD.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
-#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "FBSDKLoginKit/FBSDKLoginKit.h"
+
+
+
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 
 #endif /* Recipe_Bridging_Header_h */

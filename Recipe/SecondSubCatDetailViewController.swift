@@ -51,6 +51,8 @@ class SecondSubCatDetailViewController : UIViewController, UITableViewDelegate ,
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         print("cancel")
         hideSearchBar()
+        
+
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("done clicked \(searchBar.text)")
@@ -102,7 +104,7 @@ class SecondSubCatDetailViewController : UIViewController, UITableViewDelegate ,
     func parseData(){
         
         let rel = (self.detailItem as! PFObject).relationForKey("sub_categoryId")
-        let localquery = rel.query()!
+        let localquery = rel.query()
         localquery.orderByAscending("createdAt")
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
@@ -166,5 +168,21 @@ class SecondSubCatDetailViewController : UIViewController, UITableViewDelegate ,
         NSString *time = [formatter stringFromDate:[NSDate date]];*/
         return cell
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToRecList" {
+            if let indexPath = self.firstTableView.indexPathForSelectedRow {
+                let object = elements[indexPath.row] as! PFObject
+                let controller = segue.destinationViewController as! ThirdSubCatRecViewController
+                
+                if controller.detailItem != nil{
+                    controller.detailItem = nil
+                }
+                controller.detailItem = object
+                
+                
+            }
+        }
+        
+    }
+
 }
