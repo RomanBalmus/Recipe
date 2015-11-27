@@ -72,8 +72,16 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let saveBtn = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: "buttonMethod") //Use a selector
-        navigationItem.rightBarButtonItem = saveBtn
+        
+        let saveBtn = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: "buttonMethod")
+        
+        let todo = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "buttonMethod2")
+        
+        let buttons : NSArray = [saveBtn, todo]
+        
+        self.navigationItem.rightBarButtonItems = buttons as? [UIBarButtonItem]
+        
+        
         self.initPageMenu(detailItem!)
 
        // self.configureView()
@@ -91,6 +99,35 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
        
         
     }
+    
+    func buttonMethod2() {
+        print("todo")
+        
+        let tdobj = self.detailItem as! PFObject
+        
+        let usr = PFUser.currentUser()!
+        let rel = usr.relationForKey("toDoList")
+        
+        let nobj = PFObject(className: "ToDo")
+        nobj["done"]=false
+        nobj.setObject(tdobj, forKey: "recipeId")
+        
+        nobj.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+            if (success) {
+                print("done")
+                rel.addObject(nobj)
+                usr.saveInBackground()
+                
+            } else {
+                // Error saving message
+            }
+        }
+      
+        
+        
+        
+    }
+    
     func willMoveToPage(controller: UIViewController, index: Int){
         self.currentController = controller
         print("ctrlwill: \(controller)")
