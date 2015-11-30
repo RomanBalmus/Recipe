@@ -29,6 +29,7 @@ class ThirdViewController : UIViewController , UITableViewDelegate , UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         getData()
     }
     func getData(){

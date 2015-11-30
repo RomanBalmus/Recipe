@@ -95,18 +95,22 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
     {
        
 
-        
-        parseData()
-    }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        parseData()
-    }
-    func parseData(){
         if elements.count > 0 {
             elements.removeAllObjects()
             self.firstTableView.reloadData()
+            parseData()
+
         }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if elements.count > 0 {
+           return
+        }
+        parseData()
+    }
+    func parseData(){
+      
         let localquery = PFQuery(className:"Category")
         localquery.fromLocalDatastore()
         localquery.orderByDescending("name")
@@ -115,8 +119,9 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
             
             if error == nil {
                 // The find succeeded.
-                if objects?.count > 0 {
                     if let objects = objects   {
+                        if objects.count > 0 {
+
                         for object in objects {
                             self.firstTableView.beginUpdates()
                             self.elements.insertObject(object, atIndex: 0)

@@ -108,9 +108,9 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         let cell = tableView.dequeueReusableCellWithIdentifier("ingredientCell", forIndexPath: indexPath) as! IngredientCell
         let ingredient = (self.elements[indexPath.section] as! Compos).ingredients[indexPath.row]
         //let recipe = elements.objectAtIndex(indexPath.row) as! PFObject
-        cell.titleLbl.text = ingredient.objectForKey("name") as? String
         
-        
+        cell.titleLbl.text = "\(ingredient.objectForKey("name") as! String)\n"+"\(ingredient.objectForKey("qnt_value") as! String) "+"\(ingredient.objectForKey("qnt_def") as! String) "
+
         /*NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"hh:mm a"];  // 09:30 AM
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:1]]; // For GMT+1

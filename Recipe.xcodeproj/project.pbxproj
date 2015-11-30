@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4205259B1C0C425A001F9C95 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259A1C0C425A001F9C95 /* ToDoViewController.swift */; };
+		4205259E1C0C44CC001F9C95 /* IngredHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259D1C0C44CC001F9C95 /* IngredHeadCell.swift */; };
+		420525A01C0C44EE001F9C95 /* IngredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259F1C0C44EE001F9C95 /* IngredCell.swift */; };
 		420F62391C084F6800505B4D /* ThirdSubCatRecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F62381C084F6800505B4D /* ThirdSubCatRecViewController.swift */; };
 		420F623E1C08766D00505B4D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F623D1C08766D00505B4D /* FBSDKLoginKit.framework */; };
 		420F62451C088F3600505B4D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F62421C088F3600505B4D /* Bolts.framework */; };
@@ -14,6 +17,7 @@
 		420F62471C088F3600505B4D /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F62441C088F3600505B4D /* ParseFacebookUtilsV4.framework */; };
 		420F62491C088F6A00505B4D /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F62481C088F6A00505B4D /* ParseUI.framework */; };
 		420F624B1C0892C400505B4D /* ProtectedPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F624A1C0892C400505B4D /* ProtectedPageViewController.swift */; };
+		420F62511C08B6E000505B4D /* ToDoRecCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F62501C08B6E000505B4D /* ToDoRecCell.swift */; };
 		421243011C005F910044A5CD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 421243001C005F910044A5CD /* FBSDKCoreKit.framework */; };
 		421809E11C071FC900A627FC /* CategorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421809E01C071FC900A627FC /* CategorySearchViewController.swift */; };
 		421809E41C07221C00A627FC /* SecondSubCatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */; };
@@ -122,6 +126,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4205259A1C0C425A001F9C95 /* ToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
+		4205259D1C0C44CC001F9C95 /* IngredHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredHeadCell.swift; sourceTree = "<group>"; };
+		4205259F1C0C44EE001F9C95 /* IngredCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredCell.swift; sourceTree = "<group>"; };
 		420F62381C084F6800505B4D /* ThirdSubCatRecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdSubCatRecViewController.swift; sourceTree = "<group>"; };
 		420F623D1C08766D00505B4D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		420F62421C088F3600505B4D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -129,6 +136,7 @@
 		420F62441C088F3600505B4D /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		420F62481C088F6A00505B4D /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		420F624A1C0892C400505B4D /* ProtectedPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedPageViewController.swift; sourceTree = "<group>"; };
+		420F62501C08B6E000505B4D /* ToDoRecCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoRecCell.swift; sourceTree = "<group>"; };
 		421243001C005F910044A5CD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		421809E01C071FC900A627FC /* CategorySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySearchViewController.swift; sourceTree = "<group>"; };
 		421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondSubCatDetailViewController.swift; sourceTree = "<group>"; };
@@ -340,6 +348,9 @@
 				425215221C05C02800D2C712 /* InstructionCell.xib */,
 				425215241C05F3A100D2C712 /* IngredientCell.xib */,
 				425215261C05F3DA00D2C712 /* IngredientCell.swift */,
+				420F62501C08B6E000505B4D /* ToDoRecCell.swift */,
+				4205259D1C0C44CC001F9C95 /* IngredHeadCell.swift */,
+				4205259F1C0C44EE001F9C95 /* IngredCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -456,6 +467,7 @@
 				429972381C0377C300C4FE60 /* FirstDetailViewController.swift */,
 				421809E31C07221C00A627FC /* SecondSubCatDetailViewController.swift */,
 				420F62381C084F6800505B4D /* ThirdSubCatRecViewController.swift */,
+				4205259A1C0C425A001F9C95 /* ToDoViewController.swift */,
 			);
 			name = DetailControllers;
 			sourceTree = "<group>";
@@ -627,11 +639,13 @@
 				425215531C061B4800D2C712 /* UIButton+WebCache.m in Sources */,
 				425215541C061B4800D2C712 /* UIImage+GIF.m in Sources */,
 				425D21C71C04535100B381FC /* TodayRecipe.swift in Sources */,
+				4205259E1C0C44CC001F9C95 /* IngredHeadCell.swift in Sources */,
 				426A8A2B1BFF5EF100249AF1 /* Constants.swift in Sources */,
 				426A8A261BFF5ECB00249AF1 /* Utilities.swift in Sources */,
 				420F624B1C0892C400505B4D /* ProtectedPageViewController.swift in Sources */,
 				425D21CD1C0472F100B381FC /* VideoCell.swift in Sources */,
 				422283A11C05A7E00050BE7B /* InfoViewController.swift in Sources */,
+				4205259B1C0C425A001F9C95 /* ToDoViewController.swift in Sources */,
 				426A89A01BFF22DE00249AF1 /* SecondViewController.swift in Sources */,
 				4252154C1C061B4800D2C712 /* SDImageCache.m in Sources */,
 				426A8A3D1BFF66CF00249AF1 /* Images.swift in Sources */,
@@ -643,12 +657,14 @@
 				426A89E41BFF361F00249AF1 /* LoginViewController.swift in Sources */,
 				425215581C061B4800D2C712 /* UIImageView+WebCache.m in Sources */,
 				4252154F1C061B4800D2C712 /* SDWebImageDownloader.m in Sources */,
+				420525A01C0C44EE001F9C95 /* IngredCell.swift in Sources */,
 				426A899E1BFF22DE00249AF1 /* FirstViewController.swift in Sources */,
 				4252154A1C061B4800D2C712 /* MKAnnotationView+WebCache.m in Sources */,
 				426A89B21BFF257200249AF1 /* FourthViewController.swift in Sources */,
 				4252154E1C061B4800D2C712 /* SDWebImageDecoder.m in Sources */,
 				4252154D1C061B4800D2C712 /* SDWebImageCompat.m in Sources */,
 				425215571C061B4800D2C712 /* UIImageView+HighlightedWebCache.m in Sources */,
+				420F62511C08B6E000505B4D /* ToDoRecCell.swift in Sources */,
 				4252154B1C061B4800D2C712 /* NSData+ImageContentType.m in Sources */,
 				426A89E11BFF35FB00249AF1 /* WelcomeViewController.swift in Sources */,
 				420F62391C084F6800505B4D /* ThirdSubCatRecViewController.swift in Sources */,

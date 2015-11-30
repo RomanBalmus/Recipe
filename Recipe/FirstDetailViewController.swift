@@ -73,11 +73,11 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let saveBtn = UIBarButtonItem(barButtonSystemItem: .Organize, target: self, action: "buttonMethod")
+        let saveBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "buttonMethod3")
         
-        let todo = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "buttonMethod2")
+       // let todo = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: "buttonMethod2")
         
-        let buttons : NSArray = [saveBtn, todo]
+        let buttons : NSArray = [saveBtn/*, todo*/]
         
         self.navigationItem.rightBarButtonItems = buttons as? [UIBarButtonItem]
         
@@ -88,6 +88,43 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
         
         
         
+    }
+    func buttonMethod3(){
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        // 2
+        let deleteAction = UIAlertAction(title: "Aggiungi a preferiti", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("preferiti")
+            optionMenu.dismissViewControllerAnimated(true, completion: nil)
+
+            self.buttonMethod()
+        })
+        let saveAction = UIAlertAction(title: "Aggiungi alla lista spesa", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("spesa")
+            
+            optionMenu.dismissViewControllerAnimated(true, completion: nil)
+           self.buttonMethod2()
+
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Annulla", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+            optionMenu.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        
+        // 4
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(saveAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.presentViewController(optionMenu, animated: true, completion: nil)
     }
     func buttonMethod() {
         print("save")
@@ -116,6 +153,8 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
             if (success) {
                 print("done")
                 rel.addObject(nobj)
+                nobj.pinInBackground()
+
                 usr.saveInBackground()
                 
             } else {
