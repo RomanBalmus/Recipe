@@ -31,7 +31,6 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
                 if let robjects = robjects   {
                     for robject in robjects{
                         let compos = Compos(compos: robject)
-                        robject.pinInBackground()
 
                         let ingrRel = robject.relationForKey("ingredientId")
                         let ingrque = ingrRel.query()
@@ -41,20 +40,20 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
                             if let ingObjcts = ingObjcts{
                                 
                                 for ingrd in ingObjcts{
-                                    ingrd.pinInBackground()
 
                                     compos.addIngredient(ingrd)
-                                    self.ingredTableView.reloadData()
 
                                 }
                                 
-                            
+                                self.ingredTableView.reloadData()
+
                               
                             }
                             
                         }
                         
                         self.elements.addObject(compos)
+
                     }
                 }
                 
@@ -75,7 +74,7 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         self.doseLbl.text = "Dosi per \((self.detailItem as! PFObject).valueForKey("dose") as! String)"
 
         self.ingredTableView.tableHeaderView=doseLbl
-       
+       self.ingredTableView.sectionIndexBackgroundColor = UIColor.orangeColor()
         self.ingredTableView.registerNib(UINib(nibName: "IngredientCell", bundle: nil), forCellReuseIdentifier: "ingredientCell")
         self.ingredTableView.sectionHeaderHeight=UITableViewAutomaticDimension
         self.ingredTableView.estimatedRowHeight=44
@@ -99,6 +98,16 @@ class IngredientViewController: UIViewController , UITableViewDelegate , UITable
         let compos = (self.elements[section] as! Compos).compos
         
         return compos.valueForKey("name") as? String
+        
+    }
+     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        // This changes the header background
+        view.tintColor = UIColor.orangeColor()
+        
+        // Gets the header view as a UITableViewHeaderFooterView and changes the text colour
+        let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        headerView.textLabel!.textColor = UIColor.whiteColor()
         
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

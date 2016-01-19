@@ -107,7 +107,6 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
         
         let localquery = self.searchObj.relationForKey("sub_categoryId").query()
         localquery.orderByAscending("createdAt")
-        localquery.fromLocalDatastore()
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             if error == nil {
@@ -116,7 +115,6 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
                 if objects?.count > 0 {
                     if let objects = objects   {
                         for object in objects {
-                            object.pinInBackground()
                             let rq = object.relationForKey("recipeId").query()
                             rq.orderByAscending("createdAt")
                             if let txt = self.searchText {
@@ -128,7 +126,6 @@ class CategorySearchViewController: UIViewController, UITableViewDelegate , UITa
                             
                                 if let rqobjects = rqobjects   {
                                     for rqobject in rqobjects {
-                                        rqobject.pinInBackground()
                                         print("got \(rqobject.valueForKey("name"))")
                                         self.firstTableView.beginUpdates()
                                         self.elements.insertObject(rqobject, atIndex: 0)

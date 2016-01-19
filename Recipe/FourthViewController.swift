@@ -16,6 +16,10 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
         // Do any additional setup after loading the view, typically from a nib.
         self.firstTableView.dataSource=self
         self.firstTableView.delegate=self
+        
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,7 +43,6 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
         let user = PFUser.currentUser()!
         let rel = user.relationForKey("toDoList")
         let cv = rel.query()
-        cv.fromLocalDatastore()
         cv.orderByAscending("createdAt")
         cv.includeKey("recipeId")
         cv.findObjectsInBackgroundWithBlock {
@@ -48,9 +51,7 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
           //  print("objs: \(objects) error: \(error)")
             if let objects = objects   {
                 for object in objects {
-                    object.pinInBackground()
                     print("obj \(object)")
-
                     
                     self.elements.addObject(object["recipeId"] as! PFObject)
 
@@ -64,12 +65,24 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
         }
 
     }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if elements.count > 0{
+        let cell = self.firstTableView.dequeueReusableCellWithIdentifier("allIngCell")! as UITableViewCell
+            let tap = UITapGestureRecognizer(target: self, action: Selector("hit:"))
+            cell.addGestureRecognizer(tap)
+        return cell
+        }else{
+            return nil
+        }
+    }
+    func hit(sender: UITapGestureRecognizer){
+        performSegueWithIdentifier("goToMultiIngrList", sender: self)
+    }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        if elements.count>0{
-            return 2
-        }
+      
         return 1
     }
     
@@ -84,12 +97,7 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
-        if  indexPath.section == 0 && indexPath.row == 0{
-            let cell = tableView.dequeueReusableCellWithIdentifier("allIngCell", forIndexPath: indexPath) as UITableViewCell
-            
-            
-            return cell
-        }else{
+     
         let cell = tableView.dequeueReusableCellWithIdentifier("toDoRecCell", forIndexPath: indexPath) as! ToDoRecCell
         let recipe = elements.objectAtIndex(indexPath.row) as! PFObject
             
@@ -103,7 +111,7 @@ class FourthViewController : UIViewController , UITableViewDelegate , UITableVie
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:1]]; // For GMT+1
         NSString *time = [formatter stringFromDate:[NSDate date]];*/
         return cell
-        }
+        
         
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

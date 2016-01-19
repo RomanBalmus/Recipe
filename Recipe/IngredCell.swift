@@ -9,5 +9,6 @@
 import Foundation
 class IngredCell : UITableViewCell {
     
+    @IBOutlet weak var checkBtn: CheckBox!
     @IBOutlet weak var titleLbl: UILabel!
 }

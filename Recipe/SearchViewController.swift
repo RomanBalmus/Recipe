@@ -99,7 +99,6 @@ class SearchViewController: UIViewController, UITableViewDelegate , UITableViewD
             self.firstTableView.reloadData()
         }
         let localquery = PFQuery(className:"Recipes")
-        localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
         if let txt = self.searchText {
             if elements.count > 0{

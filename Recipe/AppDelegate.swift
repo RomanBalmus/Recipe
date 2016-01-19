@@ -46,6 +46,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
      
+     
+        
+        let q1inst = PFQuery(className: "Recipes")
+        q1inst.findObjectsInBackgroundWithBlock({
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            PFObject.pinAllInBackground(objects)
+
+            })
+
+        let q2inst = PFQuery(className: "Category")
+        q2inst.findObjectsInBackgroundWithBlock({
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            PFObject.pinAllInBackground(objects)
+            
+        })
+        let q3inst = PFQuery(className: "Sub_Category")
+        q3inst.findObjectsInBackgroundWithBlock({
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            PFObject.pinAllInBackground(objects)
+            
+        })
+        
+        let q4inst = PFQuery(className: "ToDo")
+        q4inst.findObjectsInBackgroundWithBlock({
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            PFObject.pinAllInBackground(objects)
+            
+        })
+        
        
         return true
     }
@@ -69,14 +98,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
-    /*func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject) -> Bool {
-
-            return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication,
-                withSession:PFFacebookUtils.session())
-    }*/
+    
+    func application(application: UIApplication,  didReceiveRemoteNotification userInfo: [NSObject : AnyObject],  fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if let photoId: String = userInfo["objectId"] as? String {
+            let targetPhoto = PFObject(withoutDataWithClassName: "Recipes", objectId: photoId)
+            targetPhoto.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
+                // Show photo view controller
+                if error != nil {
+                    completionHandler(UIBackgroundFetchResult.Failed)
+                } else if PFUser.currentUser() != nil {
+                    print("show must go on")
+                    //let viewController = PhotoVC(withPhoto: object)
+                    //self.navController.pushViewController(viewController, animated: true)
+                    completionHandler(UIBackgroundFetchResult.NewData)
+                } else {
+                    completionHandler(UIBackgroundFetchResult.NoData)
+                }
+            }
+        }
+        completionHandler(UIBackgroundFetchResult.NoData)
+    }
+    
+    
     func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String?,

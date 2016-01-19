@@ -10,6 +10,7 @@
 		4205259B1C0C425A001F9C95 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259A1C0C425A001F9C95 /* ToDoViewController.swift */; };
 		4205259E1C0C44CC001F9C95 /* IngredHeadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259D1C0C44CC001F9C95 /* IngredHeadCell.swift */; };
 		420525A01C0C44EE001F9C95 /* IngredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205259F1C0C44EE001F9C95 /* IngredCell.swift */; };
+		420525A21C0C999A001F9C95 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420525A11C0C999A001F9C95 /* CheckBox.swift */; };
 		420F62391C084F6800505B4D /* ThirdSubCatRecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F62381C084F6800505B4D /* ThirdSubCatRecViewController.swift */; };
 		420F623E1C08766D00505B4D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F623D1C08766D00505B4D /* FBSDKLoginKit.framework */; };
 		420F62451C088F3600505B4D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420F62421C088F3600505B4D /* Bolts.framework */; };
@@ -28,6 +29,8 @@
 		422283A71C05A81A0050BE7B /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 422283A61C05A81A0050BE7B /* InfoViewController.xib */; };
 		422283A91C05A8440050BE7B /* IngredientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 422283A81C05A8440050BE7B /* IngredientViewController.xib */; };
 		422283AB1C05A8570050BE7B /* InstructionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 422283AA1C05A8570050BE7B /* InstructionsViewController.xib */; };
+		423FBD321C20536000159A96 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FBD311C20536000159A96 /* Api.swift */; };
+		423FBD351C20539100159A96 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 423FBD341C20539100159A96 /* Config.plist */; };
 		4252151C1C05BE4C00D2C712 /* InfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4252151B1C05BE4C00D2C712 /* InfoCell.xib */; };
 		4252151F1C05BE7200D2C712 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4252151E1C05BE7200D2C712 /* InfoCell.swift */; };
 		425215211C05C00300D2C712 /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425215201C05C00300D2C712 /* InstructionCell.swift */; };
@@ -129,6 +132,7 @@
 		4205259A1C0C425A001F9C95 /* ToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		4205259D1C0C44CC001F9C95 /* IngredHeadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredHeadCell.swift; sourceTree = "<group>"; };
 		4205259F1C0C44EE001F9C95 /* IngredCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredCell.swift; sourceTree = "<group>"; };
+		420525A11C0C999A001F9C95 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		420F62381C084F6800505B4D /* ThirdSubCatRecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdSubCatRecViewController.swift; sourceTree = "<group>"; };
 		420F623D1C08766D00505B4D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		420F62421C088F3600505B4D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		422283A61C05A81A0050BE7B /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		422283A81C05A8440050BE7B /* IngredientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IngredientViewController.xib; sourceTree = "<group>"; };
 		422283AA1C05A8570050BE7B /* InstructionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstructionsViewController.xib; sourceTree = "<group>"; };
+		423FBD311C20536000159A96 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		423FBD341C20539100159A96 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		4252151B1C05BE4C00D2C712 /* InfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoCell.xib; sourceTree = "<group>"; };
 		4252151E1C05BE7200D2C712 /* InfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		425215201C05C00300D2C712 /* InstructionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionCell.swift; sourceTree = "<group>"; };
@@ -412,6 +418,7 @@
 				426A89A61BFF22DE00249AF1 /* LaunchScreen.storyboard */,
 				426A89A91BFF22DE00249AF1 /* Info.plist */,
 				426A8A1E1BFF5AF400249AF1 /* Recipe-Bridging-Header.h */,
+				423FBD341C20539100159A96 /* Config.plist */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -434,6 +441,8 @@
 				426A8A211BFF5ECB00249AF1 /* Utilities.swift */,
 				426A8A231BFF5ECB00249AF1 /* PushNotification.swift */,
 				425D21CE1C047F0500B381FC /* Helpers.swift */,
+				420525A11C0C999A001F9C95 /* CheckBox.swift */,
+				423FBD311C20536000159A96 /* Api.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -601,6 +610,7 @@
 				4252151C1C05BE4C00D2C712 /* InfoCell.xib in Resources */,
 				425215231C05C02800D2C712 /* InstructionCell.xib in Resources */,
 				422283A91C05A8440050BE7B /* IngredientViewController.xib in Resources */,
+				423FBD351C20539100159A96 /* Config.plist in Resources */,
 				422283AB1C05A8570050BE7B /* InstructionsViewController.xib in Resources */,
 				425D21C91C04571C00B381FC /* TodayRecipe.xib in Resources */,
 				425215251C05F3A100D2C712 /* IngredientCell.xib in Resources */,
@@ -619,6 +629,7 @@
 			files = (
 				421809E41C07221C00A627FC /* SecondSubCatDetailViewController.swift in Sources */,
 				425215591C061B4800D2C712 /* UIView+WebCacheOperation.m in Sources */,
+				423FBD321C20536000159A96 /* Api.swift in Sources */,
 				426A8A281BFF5ECB00249AF1 /* PushNotification.swift in Sources */,
 				42B066831C04C4500048244B /* SearchCell.swift in Sources */,
 				425215271C05F3DA00D2C712 /* IngredientCell.swift in Sources */,
@@ -641,6 +652,7 @@
 				425D21C71C04535100B381FC /* TodayRecipe.swift in Sources */,
 				4205259E1C0C44CC001F9C95 /* IngredHeadCell.swift in Sources */,
 				426A8A2B1BFF5EF100249AF1 /* Constants.swift in Sources */,
+				420525A21C0C999A001F9C95 /* CheckBox.swift in Sources */,
 				426A8A261BFF5ECB00249AF1 /* Utilities.swift in Sources */,
 				420F624B1C0892C400505B4D /* ProtectedPageViewController.swift in Sources */,
 				425D21CD1C0472F100B381FC /* VideoCell.swift in Sources */,

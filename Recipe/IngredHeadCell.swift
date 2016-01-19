@@ -9,5 +9,7 @@
 import Foundation
 class IngredHeadCell : UITableViewCell {
     
+    @IBOutlet weak var checkBtn: CheckBox!
+    @IBOutlet weak var emailBtn: UIButton!
     
 }

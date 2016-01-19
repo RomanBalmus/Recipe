@@ -27,7 +27,6 @@ class InstructionsViewController: UIViewController , UITableViewDelegate , UITab
                     for robject in robjects{
                         //print("instruct \(robject)")
                         self.elements.addObject(robject)
-                        robject.pinInBackground()
 
                         
                     }

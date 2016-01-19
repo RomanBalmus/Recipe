@@ -142,6 +142,7 @@ class ThirdSubCatRecViewController: UIViewController, UITableViewDelegate , UITa
         }
         let rel = (self.detailItem as! PFObject).relationForKey("recipeId")
         let localquery = rel.query()
+
         if let txt = self.searchText {
            
             localquery.whereKey("name", matchesRegex: txt, modifiers: "i")

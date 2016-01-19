@@ -42,14 +42,12 @@ class ThirdViewController : UIViewController , UITableViewDelegate , UITableView
         let user = PFUser.currentUser()!
         let rel = user.relationForKey("Favorites")
         let cv = rel.query()
-        cv.fromLocalDatastore()
         cv.orderByAscending("createdAt")
         cv.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
             
             if let objects = objects   {
                 for object in objects {
-                    object.pinInBackground()
                     self.firstTableView.beginUpdates()
                     self.elements.insertObject(object, atIndex: 0)
                     

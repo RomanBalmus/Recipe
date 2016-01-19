@@ -112,7 +112,6 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
     func parseData(){
       
         let localquery = PFQuery(className:"Category")
-        localquery.fromLocalDatastore()
         localquery.orderByDescending("name")
         localquery.findObjectsInBackgroundWithBlock {
             (objects:[PFObject]?, error: NSError?) -> Void in
@@ -130,15 +129,14 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
                             
                             self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                             self.firstTableView.endUpdates()
-                            object.pinInBackground()
                             
                             
                             
                         }
                         
-                        let localLast = objects.last! as PFObject
+                        //let localLast = objects.last! as PFObject
                         
-                        let remotelast = NSUserDefaults.standardUserDefaults().objectForKey("last_insert_cat") as! NSDate
+                          /*  if let remotelast = NSUserDefaults.standardUserDefaults().objectForKey("last_insert_cat") as? NSDate{
                         print("localLast: \(localLast.createdAt! as NSDate) and remoteLast: \(remotelast)")
                         
                         
@@ -157,7 +155,6 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
                                     
                                     self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                                     self.firstTableView.endUpdates()
-                                    objectsy.pinInBackground()
                                     NSUserDefaults.standardUserDefaults().setObject(objectsy.createdAt! as NSDate, forKey: "last_insert_cat")
                                     NSUserDefaults.standardUserDefaults().synchronize()
                                     
@@ -169,35 +166,39 @@ class SecondViewController : UIViewController , UITableViewDelegate , UITableVie
                             }
                         }
                         // }
+                     
+                        }else{
+                                let remotequery = PFQuery(className:"Category")
+                                remotequery.orderByDescending("name")
+                                remotequery.findObjectsInBackgroundWithBlock {
+                                    (objectsr:[PFObject]?, errorr: NSError?) -> Void in
+                                    
+                                    if let objectsr = objectsr   {
+                                        for objectr in objectsr {
+                                            self.firstTableView.beginUpdates()
+                                            self.elements.insertObject(objectr, atIndex: 0)
+                                            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                                            
+                                            self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                                            self.firstTableView.endUpdates()
+                                            NSUserDefaults.standardUserDefaults().setObject(objectr.createdAt, forKey: "last_insert_cat")
+                                            NSUserDefaults.standardUserDefaults().synchronize()
+                                            
+                                            
+                                        }
+                                    }else{
+                                        print("Error remote: \(errorr!) \(errorr!.userInfo)")
+                                        
+                                    }
+                                }
+                        }*/
                         
+                            
                     }
                     
-                }else{
-                    let remotequery = PFQuery(className:"Category")
-                    remotequery.orderByDescending("name")
-                    remotequery.findObjectsInBackgroundWithBlock {
-                        (objectsr:[PFObject]?, errorr: NSError?) -> Void in
-                        
-                        if let objectsr = objectsr   {
-                            for objectr in objectsr {
-                                self.firstTableView.beginUpdates()
-                                self.elements.insertObject(objectr, atIndex: 0)
-                                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                                
-                                self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-                                self.firstTableView.endUpdates()
-                                objectr.pinInBackground()
-                                NSUserDefaults.standardUserDefaults().setObject(objectr.createdAt, forKey: "last_insert_cat")
-                                NSUserDefaults.standardUserDefaults().synchronize()
-                                
-                                
-                            }
-                        }else{
-                            print("Error remote: \(errorr!) \(errorr!.userInfo)")
-                            
-                        }
-                    }
                 }
+                  
+                
             } else {
                 // Log details of the failure
                 print("Error local: \(error!) \(error!.userInfo)")

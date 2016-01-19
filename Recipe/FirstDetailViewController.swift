@@ -140,27 +140,53 @@ class FirstDetailViewController: UIViewController, CAPSPageMenuDelegate {
     func buttonMethod2() {
         print("todo")
         
+        
+        
+        
+        
         let tdobj = self.detailItem as! PFObject
         
         let usr = PFUser.currentUser()!
         let rel = usr.relationForKey("toDoList")
         
-        let nobj = PFObject(className: "ToDo")
-        nobj["done"]=false
-        nobj.setObject(tdobj, forKey: "recipeId")
+        rel.query().whereKey("recipeId", equalTo: tdobj).findObjectsInBackgroundWithBlock { (cvvv:[PFObject]?, err:NSError?) -> Void in
+            print("found : \(cvvv?.count)")
+            
+            if cvvv?.count == 0 {
+                let nobj = PFObject(className: "ToDo")
+                nobj["done"]=false
+                nobj.setObject(tdobj, forKey: "recipeId")
+                
+                
+                
+                nobj.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        print("done")
+                        rel.addObject(nobj)
+                        usr.saveInBackground()
+                        
+                        
+                    } else {
+                        // Error saving message
+                    }
+                }
+
+            }
+        }
         
-        nobj.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
+        
+        
+              /* nobj.saveInBackgroundWithBlock {(success: Bool, error: NSError?) -> Void in
             if (success) {
                 print("done")
                 rel.addObject(nobj)
-                nobj.pinInBackground()
 
                 usr.saveInBackground()
                 
             } else {
                 // Error saving message
             }
-        }
+        }*/
       
         
         

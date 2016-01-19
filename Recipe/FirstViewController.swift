@@ -127,7 +127,6 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
     func parseData(){
         
         let localquery = PFQuery(className:"Recipes")
-        localquery.fromLocalDatastore()
         localquery.orderByAscending("createdAt")
         let lastWeekDate = NSCalendar.currentCalendar().dateByAddingUnit(.WeekOfYear, value: -1, toDate: NSDate(), options: NSCalendarOptions())!
                 print(lastWeekDate)
@@ -148,13 +147,13 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                             
                             self.firstTableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                             self.firstTableView.endUpdates()
-                            object.pinInBackground()
+                            object.saveInBackground()
 
                             
                             
                         }
                         
-                        let localLast = objects.last! as PFObject
+                       /* let localLast = objects.last! as PFObject
                         
                         let remotelast = NSUserDefaults.standardUserDefaults().objectForKey("last_insert") as! NSDate
                         print("localLast: \(localLast.createdAt! as NSDate) and remoteLast: \(remotelast)")
@@ -185,11 +184,11 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                                     
                                 }
                             }
-                       // }
+                       // }*/
                         
                     }
                     
-                }else{
+                }/*else{
                     let remotequery = PFQuery(className:"Recipes")
                     remotequery.findObjectsInBackgroundWithBlock {
                         (objectsr:[PFObject]?, errorr: NSError?) -> Void in
@@ -213,7 +212,7 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
                             
                         }
                     }
-                }
+                }*/
             } else {
                 // Log details of the failure
                 print("Error local: \(error!) \(error!.userInfo)")
@@ -245,6 +244,8 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
         return 2
     }
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
         if PFUser.currentUser() != nil {
             print("we are logged and we are good to go")
             Utilities.askNotifications(UIApplication.sharedApplication())
@@ -254,10 +255,9 @@ class FirstViewController : UIViewController , UITableViewDelegate , UITableView
             
         }
         else{
-            Utilities.loginUser(self)
+            Utilities.loginUser(self.navigationController!)
         }
         
-        super.viewWillAppear(animated)
     }
     
     
